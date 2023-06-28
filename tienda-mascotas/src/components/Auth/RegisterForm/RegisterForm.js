@@ -1,13 +1,17 @@
 import { Form } from "semantic-ui-react";
-
+import { Auth } from "@/api";
+import { useRouter } from "next/router";
 import { validationSchema } from "./RegisterForm.form";
 
 
+const authCtrl = new Auth();
+
 export function RegisterForm() {
+
+  const router = useRouter();
 
   {/*TODO: handleChange */}
 
-  
   const createUser = async (event) => {
     event.preventDefault();
     let formData = {
@@ -19,8 +23,17 @@ export function RegisterForm() {
     const isValid= await validationSchema().isValid(formData);
     console.log(formData);
     console.log(isValid);
+    
+    
     if (isValid) {
       console.log("Enviando");
+      try {
+        await authCtrl.register(formData);
+        router.push("/login/sign-in");
+      } catch (error) {
+        console.error(error);
+      }
+      
     }
     
     

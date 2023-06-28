@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {Image, Icon, Input} from "semantic-ui-react;"
+import { Image, Icon, Input } from "semantic-ui-react";
 import styles from "./Menu.module.scss";
 
 export default function Menu(props) {

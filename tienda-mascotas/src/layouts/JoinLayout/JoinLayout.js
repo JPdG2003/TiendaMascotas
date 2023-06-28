@@ -1,9 +1,16 @@
 import Link from "next/link";
 import {Icon, Image} from "semantic-ui-react";
+import { useAuth } from "@/hooks";
+import { useRouter } from "next/router";
 import styles from "./JoinLayout.module.scss";
 
 export function JoinLayout(props) {
     const {children} = props; 
+    const router = useRouter();
+    const { user } = useAuth();
+
+    if (user) router.push("/");
+    return null;  /* If the user is logged in, it will return them to the Home */
 
   return (
     <div className={styles.container}>
