@@ -1,9 +1,9 @@
 import { Container } from "semantic-ui-react";
 import classNames from "classnames";
-import {TopBar} from "@/components/Layout";
+import { TopBar } from "@/components/Layout";
 import styles from "./BasicLayout.module.scss";
 
-export default function BasicLayout(props) {
+export function BasicLayout(props) {
   const {
     children,
     isOpenSearch = false,

@@ -4,8 +4,9 @@ import { Account } from "../Account";
 import { Menu } from "../Menu";
 import styles from "./TopBar.module.scss";
 
-export default function TopBar(props) {
+export function TopBar(props) {
     const {isOpenSearch} = props;
+
   return (
     <div className={styles.topBar}>
       <div className={styles.left}>

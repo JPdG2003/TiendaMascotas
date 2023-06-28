@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Image, Icon, Input } from "semantic-ui-react";
 import styles from "./Menu.module.scss";
 
-export default function Menu(props) {
+export function Menu(props) {
     const { isOpenSearch } = props;
     const [platforms, setPlatforms] =useState(null);
 
@@ -18,7 +18,7 @@ export default function Menu(props) {
 
   return (
     <div>
-      
+      <h1>Menu</h1>
     </div>
   )
 }
