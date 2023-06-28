@@ -9,8 +9,10 @@ export function JoinLayout(props) {
     const router = useRouter();
     const { user } = useAuth();
 
-    if (user) router.push("/");
-    return null;  /* If the user is logged in, it will return them to the Home */
+    if (user) {
+      router.push("/");
+      return null;
+    } /* If the user is logged in, it will return them to the Home */
 
   return (
     <div className={styles.container}>
