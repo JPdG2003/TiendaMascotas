@@ -1,0 +1,109 @@
+index.js
+
+import { Pet, Food } from "@/api";
+
+export { default } from "./pets";
+
+export async function getServerSideProps(context) {
+
+  const {
+    params: { pet },
+    query: { page = 1 },
+  } = context;
+
+  const petCtrl = new Pet();
+  const responsePet = await petCtrl.getBySlug(pet);
+
+  const foodCtrl = new Food();
+  const responseFood = await foodCtrl.getFoodByPetSlug(pet, page);
+
+  
+
+  return {
+    props: {
+      pet: responsePet,
+      games: responseFood.data,
+      pagination: responseFood.meta.pagination,
+    },
+  };
+}
+
+pets.js
+
+import { Container } from "semantic-ui-react";
+import { has, size } from "lodash";
+import { BasicLayout } from "@/layouts";
+import { GridFoods, Separator } from "@/components/Shared";
+
+export default function PetPage(props) {
+    const {food, pet, pagination} = props;
+    const hasProducts = size(food) > 0;
+  return (
+    <>
+
+        <BasicLayout relative>
+            <Container>
+                <Separator height={50} />
+
+                <h2>{pet.attributes.title}</h2>
+                
+                {hasProducts ? (
+                  <>
+                  <GridFoods food={food} />
+                  
+                  </>
+                ) : (
+                  <p>No result</p>
+                )}
+            </Container>
+        </BasicLayout>
+    </>
+  )
+}
+
+async getBySlug(slug) {
+        try {
+          const filters = `filters[slug][$eq]=${slug}`;
+          const url = `${ENV.API_URL}/${ENV.ENDPOINTS.PET}?${filters}`;
+    
+          const response = await fetch(url);
+          const result = await response.json();
+    
+          if (response.status !== 200) throw result;
+    
+          return result.data[0];
+        } catch (error) {
+            throw error;
+        }
+      }
+
+
+async getFoodByPetSlug(slug, page) {
+    try {
+      const filters = `filters[pet][slug][$eq]=${slug}`;
+      const pagination = `pagination[page]=${page}&pagination[pageSize]=30`;
+      const populate = "populate=*";
+      const urlParams = `${filters}&${pagination}&${populate}`;
+
+      const url = `${ENV.API_URL}/${ENV.ENDPOINTS.FOOD}?${urlParams}`;
+
+      const response = await fetch(url);
+      const result = await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+
+return pet.js to pets.js if it throws a bug
+
+/* export const schema = Yup.object({
+    email: Yup.string().email(true).required(true),
+    username: Yup.string().required(true),
+    name: Yup.string().required(true),
+    password: Yup.string().required(true),
+  }); */

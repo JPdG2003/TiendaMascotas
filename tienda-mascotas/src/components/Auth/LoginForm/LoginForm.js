@@ -25,7 +25,7 @@ export function LoginForm() {
             try {
                 const response = await authCtrl.login(formData);
                 login(response.jwt);
-                //router.push("/");
+                router.push("/");
             } catch (error) {
                 console.error(error);
             }

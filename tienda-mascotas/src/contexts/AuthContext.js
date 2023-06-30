@@ -13,7 +13,7 @@ export function AuthProvider(props) {
     const [token, setToken] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {                                 //recovers the session on each reload of the page
+    useEffect(() => {                                 //Recovers the session on each reload of the page
           (async () => {
             const token = tokenCtrl.getToken();
 
@@ -35,7 +35,6 @@ export function AuthProvider(props) {
         try {
             tokenCtrl.setToken(token);
             const response = await userCtrl.getMe();
-            console.log(response);
             setUser(response);
             setToken(token);
             setLoading(false);
@@ -51,19 +50,19 @@ export function AuthProvider(props) {
         setUser(null);
     }
 
-    /* const updateUser = (key, value) => {
+   const updateUser = (key, value) => {
         setUser({
             ...user,
             [key]: value,
-        })
-    }; */
+        });
+    };
 
     const data = {
         accessToken: token,
         user,
         login,
-        logout: null,
-        updateUser: null,
+        logout, 
+        updateUser,
     };
 
     if (loading) return null;

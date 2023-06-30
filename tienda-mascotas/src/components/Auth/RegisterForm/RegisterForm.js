@@ -10,7 +10,6 @@ export function RegisterForm() {
 
   const router = useRouter();
 
-  {/*TODO: handleChange */}
 
   const createUser = async (event) => {
     event.preventDefault();
@@ -21,12 +20,9 @@ export function RegisterForm() {
       password: event.target[3].value,
     };
     const isValid= await validationSchema().isValid(formData);
-    console.log(formData);
-    console.log(isValid);
     
     
     if (isValid) {
-      console.log("Enviando");
       try {
         await authCtrl.register(formData);
         router.push("/login/sign-in");

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "food",
     "pluralName": "foods",
-    "displayName": "Food"
+    "displayName": "Food",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,11 +15,6 @@
     "title": {
       "type": "string",
       "required": true
-    },
-    "pet": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::platform.platform"
     },
     "price": {
       "type": "decimal",
@@ -37,20 +33,25 @@
       "required": true
     },
     "cover": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
-    },
-    "gallery": {
+      "required": true,
       "allowedTypes": [
         "images"
-      ],
+      ]
+    },
+    "gallery": {
       "type": "media",
       "multiple": true,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "pet": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::pet.pet"
     }
   }
 }
