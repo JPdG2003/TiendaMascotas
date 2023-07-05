@@ -19,10 +19,10 @@ export class Food {
     }
   } */
 
-  async getLatestPublished({ limit = 9, platformId = null }) {
+  async getLatestPublished({ limit = 9, petId = null }) {
     try {
       const filterPet =
-        platformId && `filters[pet][id][$eq]=${petId}`;
+        petId && `filters[pet][id][$eq]=${petId}`;
       const paginationLimit = `pagination[limit]=${limit}`;
       const sort = `sort[0]=publishedAt:desc`;
       const populate = `populate=*`;

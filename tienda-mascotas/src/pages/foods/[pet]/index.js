@@ -13,7 +13,6 @@ export async function getServerSideProps(context){
     const foodCtrl = new Food();
     const responseFood = await foodCtrl.getFoodByPetSlug(pet, page);
 
-  console.log(page);
   return {
     props: {
       pet: responsePet,
